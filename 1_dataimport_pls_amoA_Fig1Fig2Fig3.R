@@ -81,7 +81,8 @@ dpp_seasonal<-metadata_DPP%>%
         strip.background = element_blank(),
         panel.background = element_rect(fill=NA),
         panel.grid = element_blank(),
-        panel.border = element_rect(fill=NA,size=1))
+        panel.border = element_rect(fill=NA,size=1),
+        legend.position = "none")
 dpp_seasonal
 
 dpp_all<-metadata_DPP%>%
@@ -146,7 +147,8 @@ hcp_seasonal<-metadata_DPP%>%
         strip.background = element_blank(),
         panel.background = element_rect(fill=NA),
         panel.grid = element_blank(),
-        panel.border = element_rect(fill=NA,size=1))
+        panel.border = element_rect(fill=NA,size=1),
+        legend.position = "none")
 hcp_seasonal
 
 
@@ -183,7 +185,7 @@ both_graphs<-ggarrange(dpp_all,dpp_seasonal,
                        align = "hv",
                        ncol = 2,nrow = 2,
                        common.legend = TRUE,
-                       legend = "bottom",
+                       legend = "none",
                        widths = c(1,0.4),
                        labels = c("a","b","c","d"))
 both_graphs
@@ -285,7 +287,7 @@ coefficients_both%>%
   #facet_grid(~category,scales = "free_x",space = "free_x")+
   ylab("Normalized regression coefficients")+
   scale_x_discrete(labels=c("temp" = "Temperature",
-                            "nh4"="NH<sup>+</sup><sub>4</sub>",
+                            "nh4"="NH<sup>+</sup><sub>3</sub>",
                             "no2"="NO<sup>-</sup><sub>2</sub>",
                             "don"="DON",
                             "doc"="DOC",

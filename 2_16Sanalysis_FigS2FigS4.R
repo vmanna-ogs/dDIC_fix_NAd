@@ -54,7 +54,7 @@ taxa_greater1_rel
 dpp_pseq_rel1_melt<-psmelt(taxa_greater1_rel)
 dpp_pseq_rel1_melt$Abundance<-dpp_pseq_rel1_melt$Abundance*100
 
-####Drawing Figure S2####
+####Drawing Figure 4####
 #Nitrates+amoA+nitrosopumilus
 nitrites<-metadata_DPP%>%
   ggplot(aes(x=mm_yy,y=no2,group=depth))+
@@ -85,7 +85,10 @@ nitrites<-metadata_DPP%>%
 nitrosopumulus<-dpp_pseq_rel1_melt%>%
   filter(Genus=="Candidatus Nitrosopumilus")%>%
   ggplot(aes(x=mm_yy,y=Abundance))+
-  geom_bar(stat="identity")+
+  geom_bar(stat="identity",aes(fill=depth))+
+  scale_fill_manual(name = "Depth",
+                     values=c("#FCCf14","#008082"),
+                     labels=c("Surface", "Bottom"))+
   facet_wrap(~depth,nrow = 2,strip.position = "right",
              labeller= as_labeller(c(S="Surface",B="Bottom")))+
   ylab("*Ca.* Nitrosopumilus Relative Abundance (%)")+
@@ -99,7 +102,8 @@ nitrosopumulus<-dpp_pseq_rel1_melt%>%
         strip.background = element_blank(),
         panel.background = element_rect(fill=NA),
         panel.grid = element_blank(),
-        panel.border = element_rect(fill=NA,size=1))
+        panel.border = element_rect(fill=NA,size=1),
+        legend.position = "none")
 nitrosopumulus
 
 amoA<-metadata_DPP%>%
@@ -136,7 +140,7 @@ ggarrange(nitrites,amoA,nitrosopumulus,nrow=3,
           label.x = c(0.05,0.05,0.05),
           align = "hv")
 
-####Drawing Figure S4####
+####Drawing Figure S3####
 #relative abundance of slected taxa
 dpp_pseq_rel1_melt%>%
   filter(Genus%in%c("SUP05 cluster",
@@ -160,3 +164,8 @@ dpp_pseq_rel1_melt%>%
         panel.grid = element_blank(),
         panel.border = element_rect(fill=NA,size=1),
         legend.position = "bottom")
+
+citation("microbiome")
+citation("tidyverse")
+citation ("phyloseq")
+citation("pls")
